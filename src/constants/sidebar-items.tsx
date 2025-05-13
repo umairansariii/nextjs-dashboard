@@ -1,50 +1,50 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { url } from "inspector";
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 export const SIDEBAR_ITEMS = [
-  // {
-  //   group: 'Application',
-  //   icon: Home,
-  //   items: [
-  //     {
-  //       title: 'Dashboard',
-  //       url: '#',
-  //       icon: Home,
-  //     },
-  //     {
-  //       title: 'Reports',
-  //       url: '#',
-  //       icon: Inbox,
-  //     },
-  //     {
-  //       title: 'Analytics',
-  //       url: '#',
-  //       icon: Calendar,
-  //     },
-  //   ],
-  // },
   {
-    title: 'Home',
-    url: '#',
-    icon: Home,
+    label: "Platform",
+    showLabel: true,
+    items: [
+      {
+        title: "Playground",
+        enabledGroup: true,
+        icon: Home,
+        children: [
+          {
+            title: "History",
+            url: "/history",
+          },
+          {
+            title: "Starred",
+            url: "/starred",
+          },
+          {
+            title: "Settings",
+            url: "/settings",
+          },
+        ],
+      },
+    ],
   },
   {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
-  },
-  {
-    title: 'Calendar',
-    url: '#',
-    icon: Calendar,
-  },
-  {
-    title: 'Search',
-    url: '#',
-    icon: Search,
-  },
-  {
-    title: 'Settings',
-    url: '#',
-    icon: Settings,
+    label: "Projects",
+    showLabel: true,
+    items: [
+      {
+        title: "Sales & Marketing",
+        enabledGroup: false,
+        icon: Home,
+        url: "/sales-marketing",
+        children: [],
+      },
+      {
+        title: "Travel",
+        enabledGroup: false,
+        icon: Home,
+        url: "/travel",
+        children: [],
+      },
+    ],
   },
 ];
