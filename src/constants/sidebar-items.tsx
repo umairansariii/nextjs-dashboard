@@ -1,50 +1,70 @@
-import { url } from "inspector";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, LayoutDashboard, ShoppingBag, Wallet } from "lucide-react";
 
-export const SIDEBAR_ITEMS = [
+export const SIDEBAR_MAIN = [
   {
-    label: "Platform",
-    showLabel: true,
-    items: [
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: LayoutDashboard,
+  },
+];
+
+export const SIDEBAR_ECOMMERCE = [
+  {
+    title: "Inventory",
+    icon: ShoppingBag,
+    subItems: [
       {
-        title: "Playground",
-        enabledGroup: true,
-        icon: Home,
-        children: [
-          {
-            title: "History",
-            url: "/history",
-          },
-          {
-            title: "Starred",
-            url: "/starred",
-          },
-          {
-            title: "Settings",
-            url: "/settings",
-          },
-        ],
+        title: "Products",
+        url: "#",
+      },
+      {
+        title: "Variants",
+        url: "#",
+      },
+      {
+        title: "Categories",
+        url: "#",
       },
     ],
   },
   {
-    label: "Projects",
-    showLabel: true,
-    items: [
+    title: "Sales",
+    icon: Wallet,
+    subItems: [
       {
-        title: "Sales & Marketing",
-        enabledGroup: false,
-        icon: Home,
-        url: "/sales-marketing",
-        children: [],
+        title: "Invoices",
+        url: "#",
       },
       {
-        title: "Travel",
-        enabledGroup: false,
-        icon: Home,
-        url: "/travel",
-        children: [],
+        title: "Stocks",
+        url: "#",
+      },
+      {
+        title: "Purchases",
+        url: "#",
+      },
+      {
+        title: "Returns",
+        url: "#",
       },
     ],
+  },
+];
+
+export const SIDEBAR_SETTINGS = [
+  {
+    name: "Design Engineering",
+    url: "#",
+    icon: Home,
+  },
+  {
+    name: "Sales & Marketing",
+    url: "#",
+    icon: Home,
+  },
+  {
+    name: "Travel",
+    url: "#",
+    icon: Home,
   },
 ];
