@@ -16,33 +16,28 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
-export function CollapsibleMenu({
-  items,
-  label,
-}: {
-  items: {
+interface navItemType {
+  title: string;
+  icon: LucideIcon;
+  subItems: {
     title: string;
     url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
   }[];
+}
+
+export function CollapsibleMenu({
+  navItems,
+  label,
+}: {
+  navItems: navItemType[];
   label: string;
 }) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>{label}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
-          <Collapsible
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="group/collapsible"
-          >
+        {navItems.map((item) => (
+          <Collapsible key={item.title} asChild className="group/collapsible">
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
@@ -53,7 +48,7 @@ export function CollapsibleMenu({
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
+                  {item.subItems?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
                         <a href={subItem.url}>
