@@ -53,6 +53,7 @@ export const columns: ColumnDef<Product>[] = [
         </div>
       );
     },
+    enableGlobalFilter: false,
   },
   {
     accessorKey: 'price',
@@ -92,5 +93,6 @@ export const columns: ColumnDef<Product>[] = [
         </div>
       );
     },
+    enableGlobalFilter: false,
   },
 ];
