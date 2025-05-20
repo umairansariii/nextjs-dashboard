@@ -13,6 +13,7 @@ import {
 export type Product = {
   id: string;
   title: string;
+  sku: string;
   description: string;
   price: number;
 };
@@ -21,10 +22,35 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: 'title',
     header: 'Title',
+    cell: ({ row }) => {
+      return (
+        <div className="w-[200px] text-ellipsis overflow-hidden whitespace-nowrap">
+          {row.getValue('title')}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'sku',
+    header: 'SKU',
+    cell: ({ row }) => {
+      return (
+        <div className="w-[200px] text-ellipsis overflow-hidden whitespace-nowrap">
+          {row.getValue('sku')}
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'description',
     header: 'Description',
+    cell: ({ row }) => {
+      return (
+        <div className="w-[300px] text-ellipsis overflow-hidden whitespace-nowrap">
+          {row.getValue('description')}
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'price',
@@ -36,7 +62,7 @@ export const columns: ColumnDef<Product>[] = [
         currency: 'USD',
       }).format(amount);
 
-      return <div>{formatted}</div>;
+      return <div className="w-[120px]">{formatted}</div>;
     },
   },
   {
