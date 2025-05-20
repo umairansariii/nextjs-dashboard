@@ -29,6 +29,7 @@ export const columns: ColumnDef<Product>[] = [
         </div>
       );
     },
+    enableSorting: true,
   },
   {
     accessorKey: 'sku',
@@ -40,6 +41,7 @@ export const columns: ColumnDef<Product>[] = [
         </div>
       );
     },
+    enableSorting: true,
   },
   {
     accessorKey: 'description',
@@ -64,6 +66,7 @@ export const columns: ColumnDef<Product>[] = [
 
       return <div className="w-[120px]">{formatted}</div>;
     },
+    enableSorting: true,
   },
   {
     id: 'actions',

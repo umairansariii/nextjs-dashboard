@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import {
   ColumnDef,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import {
@@ -24,10 +27,13 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import {
+  ArrowDown,
+  ArrowUp,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  ListFilter,
 } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
@@ -39,11 +45,18 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
@@ -56,12 +69,35 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
+                      {header.isPlaceholder ? null : header.column.columnDef
+                          .enableSorting ? (
+                        <Button
+                          variant="ghost"
+                          onClick={() =>
+                            header.column.toggleSorting(
+                              header.column.getIsSorted() === 'asc'
+                            )
+                          }
+                          className="flex w-full cursor-pointer justify-start !pl-0 hover:bg-transparent"
+                        >
+                          {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                          {header.column.getIsSorted() === 'desc' ? (
+                            <ArrowUp />
+                          ) : header.column.getIsSorted() === 'asc' ? (
+                            <ArrowDown />
+                          ) : (
+                            <ListFilter />
+                          )}
+                        </Button>
+                      ) : (
+                        flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )
+                      )}
                     </TableHead>
                   );
                 })}
