@@ -15,9 +15,19 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-export function BatchReview() {
+type BatchReviewProps = {
+  data: {
+    open: boolean;
+    titleField: string;
+    effectiveFields: string[];
+  };
+  onClose: () => void;
+  selectedRows: any[];
+};
+
+export function BatchReview({ data, onClose, selectedRows }: BatchReviewProps) {
   return (
-    <Dialog defaultOpen={true}>
+    <Dialog open={data.open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -31,19 +41,21 @@ export function BatchReview() {
             <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Invoice</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
+                <TableHead>{data.titleField}</TableHead>
+                {data.effectiveFields.map((field) => (
+                  <TableHead key={field}>{field}</TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
-              </TableRow>
+              {selectedRows.map((row: any, idx: number) => (
+                <TableRow key={idx}>
+                  <TableCell>{row[data.titleField]}</TableCell>
+                  {data.effectiveFields.map((field) => (
+                    <TableCell key={field}>{row[field]}</TableCell>
+                  ))}
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

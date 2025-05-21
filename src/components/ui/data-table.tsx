@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ColumnDef,
   SortingState,
@@ -42,12 +42,14 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  batchActions?: (selectedRows: any[]) => React.ReactNode;
+  onSelectionChange: any;
+  batchActions?: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onSelectionChange,
   batchActions,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -72,6 +74,14 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  useEffect(() => {
+    onSelectionChange(
+      table.getFilteredSelectedRowModel().rows.map((row) => {
+        return row.original;
+      })
+    );
+  }, [rowSelection]);
+
   return (
     <div>
       <div className="flex items-center space-x-2 py-4">
@@ -82,9 +92,9 @@ export function DataTable<TData, TValue>({
           type="search"
           className="max-w-xs"
         />
-        {table.getFilteredSelectedRowModel().rows.length > 0 &&
-          batchActions &&
-          batchActions(table.getFilteredSelectedRowModel().rows)}
+        {batchActions &&
+          table.getFilteredSelectedRowModel().rows.length > 0 &&
+          batchActions}
       </div>
       <div className="rounded-md border">
         <Table>
