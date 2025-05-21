@@ -1,6 +1,8 @@
 import { Product, columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
 import { products } from './data';
+import { ProductBatchActions } from './batch-actions';
+import { BatchReview } from '@/components/ui/batch-review';
 
 async function getProductsData(): Promise<Product[]> {
   // Fetch data from your API here.
@@ -12,7 +14,12 @@ export default async function ProductPage() {
 
   return (
     <div className="w-full px-4 py-10">
-      <DataTable columns={columns} data={data} />
+      <BatchReview />
+      <DataTable
+        columns={columns}
+        data={data}
+        batchActions={ProductBatchActions}
+      />
     </div>
   );
 }
