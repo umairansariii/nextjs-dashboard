@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Ban } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 
 type ProductBatchActionsProps = {
   setOptions: (options: {
@@ -23,7 +23,7 @@ export function ProductBatchActions({ setOptions }: ProductBatchActionsProps) {
   return (
     <div className="flex items-center space-x-2 animate-slide-in-left">
       <Button variant="outline" onClick={handleBatchInactive}>
-        <Ban /> Inactive
+        <ArrowUpDown /> Adjust price
       </Button>
     </div>
   );

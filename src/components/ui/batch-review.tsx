@@ -3,18 +3,19 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogFooter,
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import { Input } from './input';
+import { Button } from './button';
 
 type BatchReviewProps = {
   data: {
@@ -31,17 +32,15 @@ export function BatchReview({ data, onClose, selectedRows }: BatchReviewProps) {
     <Dialog open={data.open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>Bulk Update</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Review your data for accuracy before you proceed.
           </DialogDescription>
         </DialogHeader>
-        <div>
+        <div className="relative h-auto max-h-[250px] overflow-auto">
           <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
-            <TableHeader>
-              <TableRow>
+            <TableHeader className="sticky top-0 bg-white">
+              <TableRow className="shadow-sm">
                 <TableHead>Items</TableHead>
                 <TableHead>Previous</TableHead>
                 <TableHead>Current</TableHead>
@@ -58,7 +57,7 @@ export function BatchReview({ data, onClose, selectedRows }: BatchReviewProps) {
                     <Input
                       type="text"
                       defaultValue={row[data.effectiveField]}
-                      className="w-[100px] border-none outline-none"
+                      className="w-[100px] p-0 border-none outline-none focus-visible:ring-0 focus-visible:border-none"
                     />
                   </TableCell>
                 </TableRow>
@@ -66,6 +65,14 @@ export function BatchReview({ data, onClose, selectedRows }: BatchReviewProps) {
             </TableBody>
           </Table>
         </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={onClose}>
+            Discard
+          </Button>
+          <Button variant="default" type="submit">
+            Update
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
