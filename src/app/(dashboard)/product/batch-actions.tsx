@@ -7,7 +7,7 @@ type ProductBatchActionsProps = {
   setOptions: (options: {
     open: boolean;
     titleField: string;
-    effectiveFields: string[];
+    effectiveField: string;
   }) => void;
 };
 
@@ -16,7 +16,7 @@ export function ProductBatchActions({ setOptions }: ProductBatchActionsProps) {
     setOptions({
       open: true,
       titleField: 'title',
-      effectiveFields: ['price'],
+      effectiveField: 'price',
     });
   };
 

@@ -14,12 +14,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Input } from './input';
 
 type BatchReviewProps = {
   data: {
     open: boolean;
     titleField: string;
-    effectiveFields: string[];
+    effectiveField: string;
   };
   onClose: () => void;
   selectedRows: any[];
@@ -41,19 +42,25 @@ export function BatchReview({ data, onClose, selectedRows }: BatchReviewProps) {
             <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead>{data.titleField}</TableHead>
-                {data.effectiveFields.map((field) => (
-                  <TableHead key={field}>{field}</TableHead>
-                ))}
+                <TableHead>Items</TableHead>
+                <TableHead>Previous</TableHead>
+                <TableHead>Current</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {selectedRows.map((row: any, idx: number) => (
                 <TableRow key={idx}>
-                  <TableCell>{row[data.titleField]}</TableCell>
-                  {data.effectiveFields.map((field) => (
-                    <TableCell key={field}>{row[field]}</TableCell>
-                  ))}
+                  <TableCell className="py-0">{row[data.titleField]}</TableCell>
+                  <TableCell className="py-0">
+                    {row[data.effectiveField]}
+                  </TableCell>
+                  <TableCell className="py-0">
+                    <Input
+                      type="text"
+                      defaultValue={row[data.effectiveField]}
+                      className="w-[100px] border-none outline-none"
+                    />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

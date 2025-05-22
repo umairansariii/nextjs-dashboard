@@ -15,15 +15,15 @@ export function ProductTable({ data }: ProductTableProps) {
   const [batchData, setBatchData] = useState<{
     open: boolean;
     titleField: string;
-    effectiveFields: string[];
+    effectiveField: string;
   }>({
     open: false,
     titleField: '',
-    effectiveFields: [],
+    effectiveField: '',
   });
 
   const onBatchReviewClose = () => {
-    setBatchData({ open: false, titleField: '', effectiveFields: [] });
+    setBatchData({ open: false, titleField: '', effectiveField: '' });
   };
 
   return (
