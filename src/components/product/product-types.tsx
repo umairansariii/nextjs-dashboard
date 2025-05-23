@@ -15,7 +15,7 @@ export function ProductTypes() {
     <Sheet open={true}>
       <SheetContent className="min-w-[400px]">
         <SheetHeader>
-          <SheetTitle>Product Type</SheetTitle>
+          <SheetTitle>Add Product</SheetTitle>
           <SheetDescription>
             Choose a product type carefully, each type has distinct attributes
             and properties. You can't change them after creating a product.

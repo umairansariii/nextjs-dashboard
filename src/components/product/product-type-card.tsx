@@ -12,7 +12,7 @@ export function ProductTypeCard({
   icon,
 }: ProductTypeCardProps) {
   return (
-    <div className="w-full max-w-[380px] flex gap-1 p-4 border rounded-md">
+    <div className="w-full max-w-[380px] flex gap-1 p-4 border rounded-md hover:bg-amber-50 transition duration-200 ease-in-out cursor-pointer select-none">
       <div className="min-w-12 flex items-center">
         <div className="h-12 w-12 flex items-center justify-center rounded-full bg-amber-300">
           {icon}
