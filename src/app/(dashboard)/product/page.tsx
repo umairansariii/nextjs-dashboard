@@ -1,3 +1,4 @@
+import { ProductTypes } from '@/components/product/product-types';
 import { ProductTable } from './table';
 import { Product } from './columns';
 import { products } from './data';
@@ -12,6 +13,7 @@ export default async function ProductPage() {
 
   return (
     <div className="w-full px-4 py-10">
+      <ProductTypes />
       <ProductTable data={data} />
     </div>
   );
