@@ -5,6 +5,7 @@ import { BatchReview } from '@/components/ui/batch-review';
 import { Product, columns } from './columns';
 import { useState } from 'react';
 import { ProductBatchActions } from './batch-actions';
+import { ProductTableActions } from './table-actions';
 
 type ProductTableProps = {
   data: Product[];
@@ -37,6 +38,7 @@ export function ProductTable({ data }: ProductTableProps) {
         columns={columns}
         data={data}
         onSelectionChange={setSelectedRows}
+        tableActions={<ProductTableActions />}
         batchActions={<ProductBatchActions setOptions={setBatchData} />}
       />
     </>

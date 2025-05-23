@@ -43,6 +43,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onSelectionChange: any;
+  tableActions?: React.ReactNode;
   batchActions?: React.ReactNode;
 }
 
@@ -50,6 +51,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   onSelectionChange,
+  tableActions,
   batchActions,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -84,17 +86,20 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center space-x-2 py-4">
-        <Input
-          placeholder="Search"
-          value={table.getState().globalFilter ?? ''}
-          onChange={(event) => table.setGlobalFilter(event.target.value)}
-          type="search"
-          className="max-w-xs"
-        />
-        {batchActions &&
-          table.getFilteredSelectedRowModel().rows.length > 0 &&
-          batchActions}
+      <div className="flex items-center justify-between py-4">
+        <div className="flex flex-1 items-center space-x-2">
+          <Input
+            placeholder="Search"
+            value={table.getState().globalFilter ?? ''}
+            onChange={(event) => table.setGlobalFilter(event.target.value)}
+            type="search"
+            className="max-w-xs"
+          />
+          {batchActions &&
+            table.getFilteredSelectedRowModel().rows.length > 0 &&
+            batchActions}
+        </div>
+        <div>{tableActions && tableActions}</div>
       </div>
       <div className="rounded-md border">
         <Table>
